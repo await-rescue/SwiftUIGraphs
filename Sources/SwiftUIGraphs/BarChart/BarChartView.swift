@@ -12,8 +12,9 @@ public struct BarChartView: View {
     var data: [Double]
     var labels: [String]?
     let title: String
+    let accentColour: Color
     
-    public init(timeSeries: [(String, Double)], title: String) {
+    public init(timeSeries: [(String, Double)], title: String, accentColour: Color) {
         var labels = [String]()
         var data = [Double]()
         
@@ -25,18 +26,20 @@ public struct BarChartView: View {
         self.labels = labels
         self.data = data
         self.title = title
+        self.accentColour = accentColour
     }
     
-    public init(data: [Double], title: String) {
+    public init(data: [Double], title: String, accentColour: Color) {
         self.data = data
         self.title = title
+        self.accentColour = accentColour
     }
     
     public var body: some View {
         ZStack {
             VStack {
                 Text(title)
-                BarChartRow(data: data, labels: labels, accentColor: .pink)
+                BarChartRow(data: data, labels: labels, accentColor: accentColour)
             }
         }
     }
