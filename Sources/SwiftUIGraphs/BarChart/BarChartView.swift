@@ -39,6 +39,7 @@ public struct BarChartView: View {
         ZStack {
             VStack {
                 Text(title)
+                    .font(.footnote)
                 BarChartRow(data: data, labels: labels, accentColor: accentColour)
             }
         }
