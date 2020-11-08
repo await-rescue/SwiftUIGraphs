@@ -8,7 +8,7 @@
 import SwiftUI
 
 @available(iOS 13.0, *)
-struct BarChart: View {
+public struct BarChartView: View {
     var data: [Double]
     var labels: [String]?
     let title: String
@@ -32,7 +32,7 @@ struct BarChart: View {
         self.title = title
     }
     
-    var body: some View {
+    public var body: some View {
         ZStack {
             VStack {
                 Text(title)
