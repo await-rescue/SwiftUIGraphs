@@ -13,7 +13,7 @@ public struct BarChartView: View {
     var labels: [String]?
     let title: String
     
-    init(timeSeries: [TimeSeries], title: String) {
+    public init(timeSeries: [(String, Double)], title: String) {
         var labels = [String]()
         var data = [Double]()
         
@@ -27,7 +27,7 @@ public struct BarChartView: View {
         self.title = title
     }
     
-    init(data: [Double], title: String) {
+    public init(data: [Double], title: String) {
         self.data = data
         self.title = title
     }
