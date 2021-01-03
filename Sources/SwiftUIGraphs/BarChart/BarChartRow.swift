@@ -10,7 +10,8 @@ import SwiftUI
 @available(iOS 13.0, *)
 struct BarChartRow: View {
     var data: [Double]
-    var targetValue: Double?
+    let targetValue: Double?
+    let unitText: String?
     var labels: [String]?
     var accentColor: Color
     
@@ -55,10 +56,25 @@ struct BarChartRow: View {
                 
                 VStack {
                     Spacer()
-                    Rectangle()
-                        .frame(height: 1)
-                        .foregroundColor(.gray)
-                        .padding(.horizontal, 5)
+                    HStack {
+                        VStack {
+                            if let targetValue = targetValue {
+                                Text("\(targetValue)")
+                                    .padding(5)
+                            }
+                            
+                            if let unitText = unitText {
+                                Text(unitText)
+                                    .padding(5)
+                            }
+                        }
+                        .font(.footnote)
+
+                        Rectangle()
+                            .frame(height: 1)
+                            .foregroundColor(.gray)
+                            .padding(.horizontal, 5)
+                    }
                     Spacer()
                         .frame(height: CGFloat(normalizedValue(value: targetValue ?? maxValue, maxValue: maxValue, heightAvailable: geometry.size.height)))
                 }
