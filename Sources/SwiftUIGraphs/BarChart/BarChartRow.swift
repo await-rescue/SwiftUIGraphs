@@ -60,15 +60,13 @@ struct BarChartRow: View {
                         VStack {
                             if let targetValue = targetValue {
                                 Text("\(targetValue)")
-                                    .padding(5)
                             }
                             
                             if let unitText = unitText {
                                 Text(unitText)
-                                    .padding(5)
                             }
                         }
-                        .font(.footnote)
+                        .font(.system(size: 8))
 
                         Rectangle()
                             .frame(height: 1)
