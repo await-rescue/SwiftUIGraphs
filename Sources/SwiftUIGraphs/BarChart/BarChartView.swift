@@ -16,7 +16,7 @@ public struct BarChartView: View {
     let title: String
     let accentColour: Color
     
-    public init(timeSeries: [(String, Double)], targetValue: Double?, unitText: String, title: String, accentColour: Color) {
+    public init(timeSeries: [(String, Double)], targetValue: Double?, unitText: String?, title: String, accentColour: Color) {
         var labels = [String]()
         var data = [Double]()
         
@@ -33,7 +33,7 @@ public struct BarChartView: View {
         self.accentColour = accentColour
     }
     
-    public init(data: [Double], targetValue: Double?, unitText: String, title: String, accentColour: Color) {
+    public init(data: [Double], targetValue: Double?, unitText: String?, title: String, accentColour: Color) {
         self.data = data
         self.targetValue = targetValue
         self.unitText = unitText
