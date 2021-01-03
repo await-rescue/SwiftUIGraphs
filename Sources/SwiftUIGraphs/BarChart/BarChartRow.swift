@@ -59,7 +59,7 @@ struct BarChartRow: View {
                     Rectangle()
                         .frame(height: 1)
                     Spacer()
-                        .frame(height: CGFloat(normalizedValue(value: targetValue ?? maxValue, maxValue: maxValue)))
+                        .frame(height: CGFloat(normalizedValue(value: targetValue ?? maxValue, maxValue: maxValue, heightAvailable: geometry.size.height)))
                 }
             }
         }
@@ -69,7 +69,7 @@ struct BarChartRow: View {
         Double(self.data[index])/Double(self.maxValue)
     }
     
-    func normalizedValue(value: Double, maxValue: Double) -> Double {
-        value/maxValue
+    func normalizedValue(value: Double, maxValue: Double, heightAvailable: CGFloat) -> Double {
+        (value/maxValue) * Double(heightAvailable)
     }
 }
