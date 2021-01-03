@@ -52,16 +52,18 @@ struct BarChartRow: View {
                         }
                     }
                 }
-                .padding()
                 
                 VStack {
                     Spacer()
                     Rectangle()
                         .frame(height: 1)
+                        .foregroundColor(.gray)
+                        .padding()
                     Spacer()
                         .frame(height: CGFloat(normalizedValue(value: targetValue ?? maxValue, maxValue: maxValue, heightAvailable: geometry.size.height)))
                 }
             }
+            .padding()
         }
     }
     
