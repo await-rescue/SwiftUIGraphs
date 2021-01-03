@@ -58,12 +58,11 @@ struct BarChartRow: View {
                     Rectangle()
                         .frame(height: 1)
                         .foregroundColor(.gray)
-                        .padding()
+                        .padding(.horizontal, 5)
                     Spacer()
                         .frame(height: CGFloat(normalizedValue(value: targetValue ?? maxValue, maxValue: maxValue, heightAvailable: geometry.size.height)))
                 }
             }
-            .padding()
         }
     }
     
