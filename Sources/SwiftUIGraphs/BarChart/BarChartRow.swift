@@ -91,5 +91,6 @@ struct BarChartRow: View {
         print("Height available: \(heightAvailable)")
         let value = (value/maxValue) * Double(heightAvailable)
         print("Normalised value: \(value)")
+        return value
     }
 }
