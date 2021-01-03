@@ -10,11 +10,12 @@ import SwiftUI
 @available(iOS 13.0, *)
 public struct BarChartView: View {
     var data: [Double]
+    var targetValue: Double?
     var labels: [String]?
     let title: String
     let accentColour: Color
     
-    public init(timeSeries: [(String, Double)], title: String, accentColour: Color) {
+    public init(timeSeries: [(String, Double)], targetValue: Double?, title: String, accentColour: Color) {
         var labels = [String]()
         var data = [Double]()
         
@@ -25,11 +26,12 @@ public struct BarChartView: View {
         
         self.labels = labels
         self.data = data
+        self.targetValue = targetValue
         self.title = title
         self.accentColour = accentColour
     }
     
-    public init(data: [Double], title: String, accentColour: Color) {
+    public init(data: [Double], targetValue: Double?, title: String, accentColour: Color) {
         self.data = data
         self.title = title
         self.accentColour = accentColour
@@ -40,7 +42,7 @@ public struct BarChartView: View {
             VStack {
                 Text(title)
                     .font(.footnote)
-                BarChartRow(data: data, labels: labels, accentColor: accentColour)
+                BarChartRow(data: data, targetValue: targetValue, labels: labels, accentColor: accentColour)
             }
         }
     }
