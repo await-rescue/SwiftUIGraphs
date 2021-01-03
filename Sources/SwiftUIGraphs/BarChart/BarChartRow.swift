@@ -18,6 +18,8 @@ struct BarChartRow: View {
     var maxValue: Double {
         guard let max = data.max() else { return 1 }
         
+        print("Max data value: \(max)")
+        
         if let targetValue = targetValue {
             // Return whichever is the highest between max and target val
             return targetValue < max ? max : targetValue
@@ -54,6 +56,7 @@ struct BarChartRow: View {
                     }
                 }
                 
+                // Target value indicator
                 VStack {
                     Spacer()
                     HStack {
@@ -85,6 +88,8 @@ struct BarChartRow: View {
     }
     
     func normalizedValue(value: Double, maxValue: Double, heightAvailable: CGFloat) -> Double {
-        (value/maxValue) * Double(heightAvailable)
+        print("Height available: \(heightAvailable)")
+        let value = (value/maxValue) * Double(heightAvailable)
+        print("Normalised value: \(value)")
     }
 }
