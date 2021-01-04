@@ -61,7 +61,7 @@ struct BarChartRow: View {
                     HStack {
                         VStack {
                             if let targetValue = targetValue {
-                                Text("\(targetValue)")
+                                Text(targetValue.round(places: 1))
                             }
                             
                             if let unitText = unitText {
