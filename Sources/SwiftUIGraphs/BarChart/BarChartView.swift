@@ -57,12 +57,11 @@ public struct BarChartView: View {
     }
     
     public var body: some View {
-        ZStack {
-            VStack {
-                Text(title)
-                    .font(.footnote)
-                BarChartRow(data: data, targetValue: targetValue, unitText: unitText, labels: labels, accentColor: accentColour, targetLineColour: targetLineColour)
-            }
+
+        VStack {
+            Text(title)
+                .font(.footnote)
+            BarChartRow(data: data, targetValue: targetValue, unitText: unitText, labels: labels, accentColor: accentColour, targetLineColour: targetLineColour)
         }
     }
 }
