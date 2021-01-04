@@ -9,11 +9,12 @@ import SwiftUI
 
 @available(iOS 13.0, *)
 struct BarChartRow: View {
-    var data: [Double]
+    let data: [Double]
     let targetValue: Double?
     let unitText: String?
-    var labels: [String]?
-    var accentColor: Color
+    let labels: [String]?
+    let accentColor: Color
+    let targetLineColour: Color?
     
     var maxValue: Double {
         guard let max = data.max() else { return 1 }
@@ -72,7 +73,7 @@ struct BarChartRow: View {
 
                         Rectangle()
                             .frame(height: 1)
-                            .foregroundColor(.gray)
+                            .foregroundColor(targetLineColour ?? .gray)
                             .padding(.horizontal, 5)
                     }
                     Spacer()
