@@ -61,7 +61,33 @@ public struct BarChartView: View {
         VStack {
             Text(title)
                 .font(.footnote)
+            
             BarChartRow(data: data, targetValue: targetValue, unitText: unitText, labels: labels, accentColor: accentColour, targetLineColour: targetLineColour)
         }
+    }
+}
+
+
+struct BarChartView_Previews: PreviewProvider {
+    static var previews: some View {
+        
+        BarChartView(data: [10, 2, 10, 6 ,7, 3, 16],
+                     targetValue: 10,
+                     unitText: "km",
+                     title: "Test graph",
+                     accentColour: .orange,
+                     targetLineColour: .gray)
+            .previewLayout(.fixed(width: 250, height: 280))
+            .padding()
+        
+        BarChartView(timeSeries: [("M", 10), ("T", 2), ("W", 10), ("T", 6) , ("F", 7), ("S", 25), ("S", 5)],
+                     targetValue: 10,
+                     unitText: "km",
+                     title: "Test graph",
+                     accentColour: .orange,
+                     targetLineColour: .gray)
+            .previewLayout(.fixed(width: 250, height: 280))
+            .padding()
+        
     }
 }

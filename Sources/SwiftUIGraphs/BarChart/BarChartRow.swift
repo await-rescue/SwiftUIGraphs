@@ -8,6 +8,39 @@
 import SwiftUI
 
 @available(iOS 13.0, *)
+struct TargetValueIndicator: View {
+    
+    var heightAvailable: CGFloat
+    let maxValue: Double
+    let targetValue: Double
+    let unitText: String?
+    let targetLineColour: Color?
+    
+    var body: some View {
+        VStack {
+            Spacer()
+                .frame(height: heightAvailable - getTargetLineHeight(heightAvailable: heightAvailable))
+            HStack {
+               
+                Text("\(targetValue.round(places: 1)) \(unitText ?? "")")
+                    .font(.system(size: 8))
+
+                Rectangle()
+                    .frame(height: 1)
+                    .foregroundColor(targetLineColour ?? .gray)
+                    .padding(.horizontal, 5)
+            }
+            Spacer()
+                .frame(height: getTargetLineHeight(heightAvailable: heightAvailable))
+        }
+    }
+    
+    func getTargetLineHeight(heightAvailable: CGFloat) -> CGFloat {
+        CGFloat((targetValue/maxValue) * Double(heightAvailable))
+    }
+}
+
+@available(iOS 13.0, *)
 struct BarChartRow: View {
     let data: [Double]
     let targetValue: Double?
@@ -28,56 +61,35 @@ struct BarChartRow: View {
     }
     
     var body: some View {
-        GeometryReader { geometry in
+        GeometryReader { geo in
             ZStack {
                 VStack {
                     HStack(alignment: .bottom,
-                           spacing: (geometry.frame(in: .local).width) / CGFloat(self.data.count * 5)) {
+                           spacing: (geo.frame(in: .local).width) / CGFloat(self.data.count * 5)) {
                         
-                        if let labels = labels {
-                            ForEach(0..<self.data.count, id: \.self) { index in
+                        ForEach(0..<self.data.count, id: \.self) { index in
+                            VStack {
                                 BarChartBar(
                                     value: normalizedValue(index: index),
-                                    label: labels[index],
                                     accentColor: accentColor,
-                                    width: Float(geometry.frame(in: .local).width),
+                                    width: Float(geo.frame(in: .local).width),
                                     numberOfDataPoints: data.count)
                             }
-                        } else {
+                        }
+                    }
+                    
+                    if let labels = labels {
+                        HStack(alignment: .bottom,
+                               spacing: (geo.frame(in: .local).width) / CGFloat(self.data.count * 5)) {
                             ForEach(0..<self.data.count, id: \.self) { index in
-                                BarChartBar(
-                                    value: normalizedValue(index: index),
-                                    accentColor: accentColor,
-                                    width: Float(geometry.frame(in: .local).width),
-                                    numberOfDataPoints: data.count)
+                                BarChartLabel(label: labels[index], width: Float(geo.frame(in: .local).width), numberOfDataPoints: labels.count)
                             }
                         }
                     }
                 }
-                
-                // Target value indicator
-                VStack {
-                    Spacer()
-                        .frame(height: geometry.size.height - getTargetLineHeight(heightAvailable: geometry.size.height) + 1)
-                    HStack {
-                        VStack {
-                            if let targetValue = targetValue {
-                                Text(targetValue.round(places: 1))
-                            }
-                            
-                            if let unitText = unitText {
-                                Text(unitText)
-                            }
-                        }
-                        .font(.system(size: 8))
 
-                        Rectangle()
-                            .frame(height: 1)
-                            .foregroundColor(targetLineColour ?? .gray)
-                            .padding(.horizontal, 5)
-                    }
-                    Spacer()
-                        .frame(height: getTargetLineHeight(heightAvailable: geometry.size.height))
+                if let targetValue = targetValue {
+                    TargetValueIndicator(heightAvailable: geo.size.height, maxValue: maxValue, targetValue: targetValue, unitText: unitText, targetLineColour: .gray)
                 }
             }
         }
@@ -85,10 +97,5 @@ struct BarChartRow: View {
     
     func normalizedValue(index: Int) -> Double {
         Double(self.data[index])/Double(self.maxValue)
-    }
-    
-    func getTargetLineHeight(heightAvailable: CGFloat) -> CGFloat {
-        let value = targetValue ?? maxValue
-        return CGFloat((value/maxValue) * Double(heightAvailable))
     }
 }

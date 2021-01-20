@@ -24,8 +24,8 @@ let package = Package(
         .target(
             name: "SwiftUIGraphs",
             dependencies: []),
-        .testTarget(
-            name: "SwiftUIGraphsTests",
-            dependencies: ["SwiftUIGraphs"]),
+//        .testTarget(
+//            name: "SwiftUIGraphsTests",
+//            dependencies: ["SwiftUIGraphs"]),
     ]
 )

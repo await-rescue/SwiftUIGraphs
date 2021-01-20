@@ -10,7 +10,6 @@ import SwiftUI
 @available(iOS 13.0, *)
 struct BarChartBar: View {
     var value: Double
-    var label: String?
     let accentColor: Color
     
     let width: Float
@@ -27,11 +26,6 @@ struct BarChartBar: View {
                 RoundedRectangle(cornerRadius: 4)
                     .fill(accentColor)
                     .scaleEffect(CGSize(width: 1, height: scaleValue), anchor: .bottom)
-                
-                if let label = label {
-                    Text(label)
-                        .font(.footnote)
-                }
             }
         }
         .frame(width: CGFloat(cellWidth))
