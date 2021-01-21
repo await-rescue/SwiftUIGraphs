@@ -36,7 +36,7 @@ struct TargetValueIndicator: View {
     }
     
     func getTargetLineHeight(heightAvailable: CGFloat) -> CGFloat {
-        CGFloat((targetValue/maxValue) * Double(heightAvailable)) * 1.05
+        CGFloat((targetValue/maxValue) * Double(heightAvailable))
     }
 }
 
