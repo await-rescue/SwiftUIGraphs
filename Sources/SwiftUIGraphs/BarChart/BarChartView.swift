@@ -71,13 +71,13 @@ public struct BarChartView: View {
 struct BarChartView_Previews: PreviewProvider {
     static var previews: some View {
         
-        BarChartView(data: [10, 2, 10, 6 ,7, 3, 16],
+        BarChartView(data: [10, 2, 10, 6 ,7, 3, 14],
                      targetValue: 10,
                      unitText: "km",
                      title: "Test graph",
                      accentColour: .orange,
                      targetLineColour: .gray)
-            .previewLayout(.fixed(width: 250, height: 280))
+            .previewLayout(.fixed(width: 250, height: 220))
             .padding()
         
         BarChartView(timeSeries: [("M", 10), ("T", 2), ("W", 10), ("T", 6) , ("F", 7), ("S", 25), ("S", 5)],
@@ -86,7 +86,7 @@ struct BarChartView_Previews: PreviewProvider {
                      title: "Test graph",
                      accentColour: .orange,
                      targetLineColour: .gray)
-            .previewLayout(.fixed(width: 250, height: 280))
+            .previewLayout(.fixed(width: 290, height: 300))
             .padding()
         
     }

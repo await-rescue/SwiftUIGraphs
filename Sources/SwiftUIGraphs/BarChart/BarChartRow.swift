@@ -62,34 +62,44 @@ struct BarChartRow: View {
     
     var body: some View {
         GeometryReader { geo in
-            ZStack {
-                VStack {
-                    HStack(alignment: .bottom,
-                           spacing: (geo.frame(in: .local).width) / CGFloat(self.data.count * 5)) {
-                        
-                        ForEach(0..<self.data.count, id: \.self) { index in
-                            VStack {
-                                BarChartBar(
-                                    value: normalizedValue(index: index),
-                                    accentColor: accentColor,
-                                    width: Float(geo.frame(in: .local).width),
-                                    numberOfDataPoints: data.count)
+            VStack {
+                GeometryReader { innerGeo in
+                    ZStack {
+                        HStack(alignment: .bottom,
+                               spacing: (innerGeo.frame(in: .local).width) / CGFloat(self.data.count * 5)) {
+                            
+                            ForEach(0..<self.data.count, id: \.self) { index in
+                                VStack {
+                                    BarChartBar(
+                                        value: normalizedValue(index: index),
+                                        accentColor: accentColor,
+                                        width: Float(innerGeo.frame(in: .local).width),
+                                        numberOfDataPoints: data.count)
+                                }
                             }
                         }
-                    }
-                    
-                    if let labels = labels {
-                        HStack(alignment: .bottom,
-                               spacing: (geo.frame(in: .local).width) / CGFloat(self.data.count * 5)) {
-                            ForEach(0..<self.data.count, id: \.self) { index in
-                                BarChartLabel(label: labels[index], width: Float(geo.frame(in: .local).width), numberOfDataPoints: labels.count)
-                            }
+                        
+                        if let targetValue = targetValue {
+                            TargetValueIndicator(heightAvailable: innerGeo.size.height, maxValue: maxValue, targetValue: targetValue, unitText: unitText, targetLineColour: .gray)
                         }
                     }
                 }
-
-                if let targetValue = targetValue {
-                    TargetValueIndicator(heightAvailable: geo.size.height, maxValue: maxValue, targetValue: targetValue, unitText: unitText, targetLineColour: .gray)
+                
+                // Hack
+                HStack(alignment: .bottom,
+                       spacing: (geo.frame(in: .local).width) / CGFloat(self.data.count * 5)) {
+                    ForEach(0..<self.data.count, id: \.self) { index in
+                        Text("")
+                    }
+                }
+                
+                if let labels = labels {
+                    HStack(alignment: .bottom,
+                           spacing: (geo.frame(in: .local).width) / CGFloat(self.data.count * 5)) {
+                        ForEach(0..<self.data.count, id: \.self) { index in
+                            BarChartLabel(label: labels[index], width: Float(geo.frame(in: .local).width), numberOfDataPoints: labels.count)
+                        }
+                    }
                 }
             }
         }
