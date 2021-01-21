@@ -82,7 +82,7 @@ struct BarChartView_Previews: PreviewProvider {
         
         BarChartView(timeSeries: [("M", 10), ("T", 2), ("W", 10), ("T", 6) , ("F", 7), ("S", 25), ("S", 5)],
                      targetValue: 10,
-                     unitText: "km",
+                     unitText: nil,
                      title: "Test graph",
                      accentColour: .orange,
                      targetLineColour: .gray)
