@@ -89,7 +89,8 @@ struct BarChartRow: View {
                 HStack(alignment: .bottom,
                        spacing: (geo.frame(in: .local).width) / CGFloat(self.data.count * 5)) {
                     ForEach(0..<self.data.count, id: \.self) { index in
-                        Text("")
+                        Text(" ")
+                            .font(.system(.caption))
                     }
                 }
                 
