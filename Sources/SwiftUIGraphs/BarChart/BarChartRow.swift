@@ -86,13 +86,13 @@ struct BarChartRow: View {
                 }
                 
                 // Hack
-//                HStack(alignment: .bottom,
-//                       spacing: (geo.frame(in: .local).width) / CGFloat(self.data.count * 5)) {
-//                    ForEach(0..<self.data.count, id: \.self) { index in
-//                        Text("")
-//                            .font(.system(.caption))
-//                    }
-//                }
+                HStack(alignment: .bottom,
+                       spacing: (geo.frame(in: .local).width) / CGFloat(self.data.count * 5)) {
+                    ForEach(0..<self.data.count, id: \.self) { index in
+                        Text("")
+                            .font(.system(.caption))
+                    }
+                }
                 
                 if let labels = labels {
                     HStack(alignment: .bottom,
