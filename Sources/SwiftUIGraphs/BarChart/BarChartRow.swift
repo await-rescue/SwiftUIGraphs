@@ -20,16 +20,20 @@ struct TargetValueIndicator: View {
         VStack {
             Spacer()
                 .frame(height: heightAvailable - getTargetLineHeight(heightAvailable: heightAvailable))
-            HStack {
-               
-                Text("\(targetValue.round(places: 1)) \(unitText ?? "")")
-                    .font(.system(size: 8))
-
+            
+            ZStack {
                 Rectangle()
                     .frame(height: 1)
                     .foregroundColor(targetLineColour ?? .gray)
                     .padding(.horizontal, 5)
+                
+//                HStack {
+//                    Text("\(targetValue.round(places: 1)) \(unitText ?? "")")
+//                        .font(.system(size: 8))
+//                    Spacer()
+//                }
             }
+
             Spacer()
                 .frame(height: getTargetLineHeight(heightAvailable: heightAvailable))
         }
@@ -42,6 +46,7 @@ struct TargetValueIndicator: View {
 
 @available(iOS 13.0, *)
 struct BarChartRow: View {
+    let mode: BarGraphMode
     let data: [Double]
     let targetValue: Double?
     let unitText: String?
