@@ -27,7 +27,7 @@ public struct BarChartView: View {
         case .countUp:
             return "Target"
         case .countDown:
-            return "Limit"
+            return "Amount left"
         }
     }
     
@@ -82,7 +82,7 @@ public struct BarChartView: View {
                 Spacer()
                 if let targetValue = targetValue {
                     Text("\(targetTextPrefix): \(targetValue.round(places: 1)) \(unitText ?? "")")
-                        .font(.system(size: 8))
+                        .font(.footnote)
                 }
             }
             

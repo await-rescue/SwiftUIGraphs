@@ -112,6 +112,13 @@ struct BarChartRow: View {
     }
     
     func normalizedValue(index: Int) -> Double {
-        Double(self.data[index])/Double(self.maxValue)
+        let amountDone = Double(self.data[index])/Double(self.maxValue)
+        
+        switch mode {
+        case .countUp:
+            return amountDone
+        case .countDown:
+            return 1 - amountDone
+        }
     }
 }
