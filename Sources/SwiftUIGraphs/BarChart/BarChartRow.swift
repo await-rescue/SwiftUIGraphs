@@ -26,12 +26,6 @@ struct TargetValueIndicator: View {
                     .frame(height: 1)
                     .foregroundColor(targetLineColour ?? .gray)
                     .padding(.horizontal, 5)
-                
-//                HStack {
-//                    Text("\(targetValue.round(places: 1)) \(unitText ?? "")")
-//                        .font(.system(size: 8))
-//                    Spacer()
-//                }
             }
 
             Spacer()
@@ -47,7 +41,7 @@ struct TargetValueIndicator: View {
 @available(iOS 13.0, *)
 struct BarChartRow: View {
     let mode: BarGraphMode
-    let data: [Double]
+    let data: [Double?]
     let targetValue: Double?
     let unitText: String?
     let labels: [String]?
@@ -55,7 +49,13 @@ struct BarChartRow: View {
     let targetLineColour: Color?
     
     var maxValue: Double {
-        guard let max = data.max() else { return 1 }
+        var max: Double = 0
+        
+        for value in data {
+            if value ?? 0 > max {
+                max = value ?? 0
+            }
+        }
         
         if let targetValue = targetValue {
             // Return whichever is the highest between max and target val
@@ -112,7 +112,10 @@ struct BarChartRow: View {
     }
     
     func normalizedValue(index: Int) -> Double {
-        let amountDone = Double(self.data[index])/Double(self.maxValue)
+        
+        guard let value = data[index] else { return 0 }
+        
+        let amountDone = Double(value)/Double(self.maxValue)
         
         switch mode {
         case .countUp:

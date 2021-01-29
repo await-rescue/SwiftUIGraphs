@@ -13,7 +13,7 @@ public enum BarGraphMode {
 
 @available(iOS 13.0, *)
 public struct BarChartView: View {
-    let data: [Double]
+    let data: [Double?]
     let targetValue: Double?
     let unitText: String?
     var labels: [String]?
@@ -32,7 +32,7 @@ public struct BarChartView: View {
     }
     
     public init(mode: BarGraphMode,
-                timeSeries: [(String, Double)],
+                timeSeries: [TimeSeries],
                 targetValue: Double?,
                 unitText: String?,
                 title: String,
@@ -40,11 +40,11 @@ public struct BarChartView: View {
                 targetLineColour: Color?) {
 
         var labels = [String]()
-        var data = [Double]()
+        var data = [Double?]()
         
         for dataPoint in timeSeries {
             labels.append(dataPoint.0)
-            data.append(dataPoint.1)
+            data.append(dataPoint.1 ?? nil)
         }
         self.mode = mode
         self.labels = labels
@@ -136,7 +136,7 @@ struct BarChartView_Previews: PreviewProvider {
             .padding()
         
         BarChartView(mode: .countDown,
-                     timeSeries: [("M", 2), ("T", 2), ("W", 1), ("T", 0) , ("F", 2), ("S", 0), ("S", 0)],
+                     timeSeries: [("M", nil), ("T", nil), ("W", 1), ("T", 0) , ("F", 2), ("S", 0), ("S", 0)],
                      targetValue: 2,
                      unitText: nil,
                      title: "Test graph (count down)",
