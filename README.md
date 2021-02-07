@@ -1,3 +1,3 @@
 # SwiftUIGraphs
 
-A description of this package.
+Basic graphs in SwiftUI
