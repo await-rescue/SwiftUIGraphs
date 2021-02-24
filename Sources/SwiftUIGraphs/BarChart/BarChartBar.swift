@@ -26,6 +26,7 @@ struct BarChartBar: View {
             VStack {
                 RoundedRectangle(cornerRadius: 4)
                     .fill(required == true ? accentColor : Color.gray)
+                    .opacity(required == true ? 1 : 0.5)
                     .scaleEffect(CGSize(width: 1, height: scaleValue), anchor: .bottom)
             }
         }
