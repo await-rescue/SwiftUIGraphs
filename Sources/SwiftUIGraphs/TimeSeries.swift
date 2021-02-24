@@ -7,4 +7,4 @@
 
 import Foundation
 
-public typealias TimeSeries = (String, Double?)
+public typealias TimeSeries = (String, Double?, Bool)

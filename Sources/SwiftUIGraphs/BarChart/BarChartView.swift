@@ -38,15 +38,16 @@ public struct BarChartView: View {
                 unitText: String?,
                 title: String,
                 accentColour: Color,
-                targetLineColour: Color?,
-                requiredItems: [Bool]) {
+                targetLineColour: Color?) {
 
         var labels = [String]()
         var data = [Double?]()
+        var requiredItems = [Bool]()
         
         for dataPoint in timeSeries {
             labels.append(dataPoint.0)
             data.append(dataPoint.1 ?? nil)
+            requiredItems.append(dataPoint.2)
         }
         
         self.mode = mode
@@ -84,40 +85,33 @@ public struct BarChartView: View {
 struct BarChartView_Previews: PreviewProvider {
     static var previews: some View {
         
-        let requiredItems = [
-            true, true, false, true, true, true, true
-        ]
-        
         BarChartView(mode: .countUp,
-                    timeSeries: [("M", 10), ("T", 2), ("W", 10), ("T", 6) , ("F", 7), ("S", 25), ("S", 5)],
+                    timeSeries: [("M", 10, true), ("T", 2, true), ("W", 10, false), ("T", 6, true) , ("F", 7, true), ("S", 25, true), ("S", 5, true)],
                      targetValue: 10,
                      unitText: nil,
                      title: "Test graph",
                      accentColour: .orange,
-                     targetLineColour: .gray,
-                     requiredItems: requiredItems)
+                     targetLineColour: .gray)
             .previewLayout(.fixed(width: 250, height: 220))
             .padding()
         
         BarChartView(mode: .countUp,
-                     timeSeries: [("M", 5), ("T", 3), ("W", 5), ("T", 5) , ("F", 4), ("S", 2), ("S", 4)],
+                     timeSeries: [("M", 5, false), ("T", 3, true), ("W", 5, true), ("T", 5, true) , ("F", 4, true), ("S", 2, true), ("S", 4, true)],
                      targetValue: 5,
                      unitText: nil,
                      title: "Test graph (bug)",
                      accentColour: .orange,
-                     targetLineColour: .gray,
-                     requiredItems: requiredItems)
+                     targetLineColour: .gray)
             .previewLayout(.fixed(width: 250, height: 220))
             .padding()
         
         BarChartView(mode: .countDown,
-                     timeSeries: [("M", nil), ("T", nil), ("W", 1), ("T", 0) , ("F", 2), ("S", 0), ("S", 0)],
+                     timeSeries: [("M", nil, false), ("T", nil, true), ("W", 1, true), ("T", 0, true) , ("F", 2, true), ("S", 0, true), ("S", 0, true)],
                      targetValue: 2,
                      unitText: nil,
                      title: "Test graph (count down)",
                      accentColour: .orange,
-                     targetLineColour: .gray,
-                     requiredItems: requiredItems)
+                     targetLineColour: .gray)
             .previewLayout(.fixed(width: 250, height: 220))
             .padding()
     }
