@@ -10,6 +10,7 @@ import SwiftUI
 @available(iOS 13.0, *)
 struct BarChartBar: View {
     var value: Double
+    let required: Bool
     let accentColor: Color
     
     let width: Float
@@ -24,7 +25,7 @@ struct BarChartBar: View {
         ZStack {
             VStack {
                 RoundedRectangle(cornerRadius: 4)
-                    .fill(accentColor)
+                    .fill(required == true ? accentColor : Color.gray)
                     .scaleEffect(CGSize(width: 1, height: scaleValue), anchor: .bottom)
             }
         }

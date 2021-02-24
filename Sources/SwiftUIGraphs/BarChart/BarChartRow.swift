@@ -47,6 +47,7 @@ struct BarChartRow: View {
     let labels: [String]?
     let accentColor: Color
     let targetLineColour: Color?
+    let requiredItems: [Bool]
     
     var maxValue: Double {
         var max: Double = 0
@@ -77,9 +78,10 @@ struct BarChartRow: View {
                                 VStack {
                                     BarChartBar(
                                         value: normalizedValue(index: index),
-                                        accentColor: accentColor,
+                                        required: requiredItems[index], accentColor: accentColor,
                                         width: Float(innerGeo.frame(in: .local).width),
-                                        numberOfDataPoints: data.count)
+                                        numberOfDataPoints: data.count
+                                    )
                                 }
                             }
                         }
@@ -103,7 +105,8 @@ struct BarChartRow: View {
                     HStack(alignment: .bottom,
                            spacing: (geo.frame(in: .local).width) / CGFloat(self.data.count * 5)) {
                         ForEach(0..<self.data.count, id: \.self) { index in
-                            BarChartLabel(label: labels[index], width: Float(geo.frame(in: .local).width), numberOfDataPoints: labels.count)
+                            BarChartLabel(label: labels[index], width: Float(geo.frame(in: .local).width),
+                                          required: requiredItems[index], numberOfDataPoints: labels.count)
                         }
                     }
                 }

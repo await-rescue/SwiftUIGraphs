@@ -11,6 +11,7 @@ import SwiftUI
 struct BarChartLabel: View {
     let label: String
     let width: Float
+    let required: Bool
     
     let numberOfDataPoints: Int
     var cellWidth: Double {
@@ -21,5 +22,6 @@ struct BarChartLabel: View {
         Text(label)
             .font(.system(.footnote))
             .frame(minWidth: CGFloat(cellWidth), maxWidth: CGFloat(cellWidth))
+            .opacity(required == true ? 1 : 0.5)
     }
 }

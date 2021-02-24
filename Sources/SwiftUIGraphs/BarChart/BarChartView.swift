@@ -21,6 +21,7 @@ public struct BarChartView: View {
     let accentColour: Color
     let targetLineColour: Color?
     let mode: BarGraphMode
+    let requiredItems: [Bool]
     
     var targetTextPrefix: String {
         switch mode {
@@ -37,7 +38,8 @@ public struct BarChartView: View {
                 unitText: String?,
                 title: String,
                 accentColour: Color,
-                targetLineColour: Color?) {
+                targetLineColour: Color?,
+                requiredItems: [Bool]) {
 
         var labels = [String]()
         var data = [Double?]()
@@ -46,6 +48,7 @@ public struct BarChartView: View {
             labels.append(dataPoint.0)
             data.append(dataPoint.1 ?? nil)
         }
+        
         self.mode = mode
         self.labels = labels
         self.data = data
@@ -54,23 +57,7 @@ public struct BarChartView: View {
         self.title = title
         self.accentColour = accentColour
         self.targetLineColour = targetLineColour
-    }
-    
-    public init(mode: BarGraphMode,
-                data: [Double],
-                targetValue: Double?,
-                unitText: String?,
-                title: String,
-                accentColour: Color,
-                targetLineColour: Color?) {
-        
-        self.mode = mode
-        self.data = data
-        self.targetValue = targetValue
-        self.unitText = unitText
-        self.title = title
-        self.accentColour = accentColour
-        self.targetLineColour = targetLineColour
+        self.requiredItems = requiredItems
     }
     
     public var body: some View {
@@ -86,7 +73,9 @@ public struct BarChartView: View {
                 }
             }
             
-            BarChartRow(mode: mode, data: data, targetValue: targetValue, unitText: unitText, labels: labels, accentColor: accentColour, targetLineColour: targetLineColour)
+            BarChartRow(mode: mode, data: data, targetValue: targetValue,
+                        unitText: unitText, labels: labels, accentColor: accentColour,
+                        targetLineColour: targetLineColour, requiredItems: requiredItems)
         }
     }
 }
@@ -95,25 +84,9 @@ public struct BarChartView: View {
 struct BarChartView_Previews: PreviewProvider {
     static var previews: some View {
         
-        BarChartView(mode: .countUp,
-                     data: [1, 0, 0, 1 ,0, 1, 1],
-                     targetValue: 1,
-                     unitText: "km",
-                     title: "Test graph",
-                     accentColour: .orange,
-                     targetLineColour: .gray)
-            .previewLayout(.fixed(width: 250, height: 220))
-            .padding()
-        
-        BarChartView(mode: .countUp,
-                     data: [10, 2, 10, 6 ,7, 3, 18],
-                     targetValue: 10,
-                     unitText: "km",
-                     title: "Test graph",
-                     accentColour: .orange,
-                     targetLineColour: .gray)
-            .previewLayout(.fixed(width: 250, height: 220))
-            .padding()
+        let requiredItems = [
+            true, true, false, true, true, true, true
+        ]
         
         BarChartView(mode: .countUp,
                     timeSeries: [("M", 10), ("T", 2), ("W", 10), ("T", 6) , ("F", 7), ("S", 25), ("S", 5)],
@@ -121,7 +94,8 @@ struct BarChartView_Previews: PreviewProvider {
                      unitText: nil,
                      title: "Test graph",
                      accentColour: .orange,
-                     targetLineColour: .gray)
+                     targetLineColour: .gray,
+                     requiredItems: requiredItems)
             .previewLayout(.fixed(width: 250, height: 220))
             .padding()
         
@@ -131,7 +105,8 @@ struct BarChartView_Previews: PreviewProvider {
                      unitText: nil,
                      title: "Test graph (bug)",
                      accentColour: .orange,
-                     targetLineColour: .gray)
+                     targetLineColour: .gray,
+                     requiredItems: requiredItems)
             .previewLayout(.fixed(width: 250, height: 220))
             .padding()
         
@@ -141,7 +116,8 @@ struct BarChartView_Previews: PreviewProvider {
                      unitText: nil,
                      title: "Test graph (count down)",
                      accentColour: .orange,
-                     targetLineColour: .gray)
+                     targetLineColour: .gray,
+                     requiredItems: requiredItems)
             .previewLayout(.fixed(width: 250, height: 220))
             .padding()
     }
