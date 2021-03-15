@@ -32,7 +32,7 @@ struct BarChartBar: View {
         }
         .frame(width: CGFloat(cellWidth))
         .onAppear {
-            withAnimation(.easeInOut(duration: 0.3).delay(0.3)) {
+            withAnimation(.easeInOut(duration: 0.7).delay(0.4)) {
                 scaleValue = value
             }
         }
