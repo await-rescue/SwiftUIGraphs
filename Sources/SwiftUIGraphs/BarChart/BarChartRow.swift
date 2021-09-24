@@ -41,6 +41,7 @@ struct TargetValueIndicator: View {
 @available(iOS 13.0, *)
 struct BarChartRow: View {
     let mode: BarGraphMode
+    let cornerRadius: Double
     let data: [Double?]
     let targetValue: Double?
     let unitText: String?
@@ -78,7 +79,7 @@ struct BarChartRow: View {
                                 VStack {
                                     BarChartBar(
                                         value: normalizedValue(index: index),
-                                        required: requiredItems[index], accentColor: accentColor,
+                                        required: requiredItems[index], accentColor: accentColor, cornerRadius: cornerRadius,
                                         width: Float(innerGeo.frame(in: .local).width),
                                         numberOfDataPoints: data.count
                                     )
